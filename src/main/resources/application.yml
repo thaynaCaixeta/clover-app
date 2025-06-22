@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: clover
+  docker:
+    compose:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cloverdb
+    username: dev
+    password: dev
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: update
+      show-sql: true
