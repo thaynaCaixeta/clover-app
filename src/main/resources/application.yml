@@ -11,5 +11,12 @@ spring:
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
-      ddl-auto: update
+      ddl-auto: none
       show-sql: true
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/cloverdb
+    user: dev
+    password: dev
+    locations: classpath:database/migrations
+    unknown-database-version-allowed: true

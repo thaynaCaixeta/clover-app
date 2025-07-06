@@ -36,7 +36,8 @@ This project showcases scalable backend architecture for cloud deployment with s
   - A **Render background worker** is triggered to calculate number of hits per bet.
   - Top-3 winner reports are generated asynchronously.
   - Optional CSV export supported.
-  - Results are made available via admin endpoints.
+  - Results are made availab918920
+  - le via admin endpoints.
 
 ---
 

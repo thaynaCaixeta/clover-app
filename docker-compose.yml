@@ -2,10 +2,18 @@ version: '3.8'
 services:
   postgres:
     image: postgres:latest
-    container_name: local_db
+    container_name: cloverdb
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: cloverdb
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: dev
+
+  flyway:
+    image: flyway/flyway:latest
+    depends_on:
+      - postgres
+    command: -url=jdbc:postgresql://postgres:5432/cloverdb -user=dev -password=dev migrate
+    volumes:
+      - ./src/main/resources/database/migrations:/flyway/sql
