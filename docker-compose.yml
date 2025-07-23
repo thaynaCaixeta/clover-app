@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   postgres:
     image: postgres:latest
@@ -9,11 +10,33 @@ services:
       POSTGRES_DB: cloverdb
       POSTGRES_USER: dev
       POSTGRES_PASSWORD: dev
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   flyway:
     image: flyway/flyway:latest
     depends_on:
-      - postgres
-    command: -url=jdbc:postgresql://postgres:5432/cloverdb -user=dev -password=dev migrate
+      postgres:
+        condition: service_healthy
+    command:
+      - -url=jdbc:postgresql://postgres:5432/cloverdb
+      - -user=dev
+      - -password=dev
+      - migrate
     volumes:
       - ./src/main/resources/database/migrations:/flyway/sql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      flyway:
+        condition: service_completed_successfully
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: default

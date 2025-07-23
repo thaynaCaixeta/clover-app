@@ -1,30 +1,23 @@
 package com.tackr.clover.service;
 
+import com.tackr.clover.domain.Admin;
 import com.tackr.clover.domain.Game;
-import com.tackr.clover.domain.User;
-import com.tackr.clover.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminServiceImpl implements UserService, AdminService {
-
-    private final UserRepository userRepository;
-
-    public AdminServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+public class AdminServiceImpl implements AdminService {
 
     @Override
-    public Game configureNewGame() {
+    public Game configureGame() {
+        // TODO: Implement new game configuration
         return null;
     }
 
     @Override
-    public User createNewUser() {
-        return null;
-    }
-
-    public UserRepository getUserRepository() {
-        return userRepository;
+    public Admin createAdmin() {
+        // TODO: Implement new admin creation
+        Admin admin = new Admin();
+        admin.setActive(true);
+        return admin;
     }
 }

@@ -1,17 +1,25 @@
 package com.tackr.clover.domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "admins")
 public class Admin extends User {
 
-    private Boolean isAdmin;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    public Admin(UUID id, String username, String password, LocalDateTime createdAt, Boolean isActive) {
-        super(id, username, password, createdAt, isActive);
+    public Admin() {}
+
+    public Admin(UUID externalID, LocalDateTime createdAt, Boolean isActive) {
+        super(externalID, createdAt, isActive);
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
+    public UUID getId() {
+        return id;
     }
 }

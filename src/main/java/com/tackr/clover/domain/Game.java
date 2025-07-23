@@ -13,20 +13,24 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(updatable = false)
     private Integer numberOfRounds;
 
-    private final LocalDateTime createAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createAt;
 
-    private final LocalDateTime closesAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime closesAt;
 
     private GameStatus status;
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    private User createdBy;
+    private Admin createdBy;
 
-    public Game(UUID id, Integer numberOfRounds, LocalDateTime createAt, LocalDateTime closesAt, GameStatus status, User createdBy) {
-        this.id = id;
+    public Game() {}
+
+    public Game(Integer numberOfRounds, LocalDateTime createAt, LocalDateTime closesAt, GameStatus status, Admin createdBy) {
         this.numberOfRounds = numberOfRounds;
         this.createAt = createAt;
         this.closesAt = closesAt;
@@ -38,16 +42,8 @@ public class Game {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     public Integer getNumberOfRounds() {
         return numberOfRounds;
-    }
-
-    public void setNumberOfRounds(Integer numberOfRounds) {
-        this.numberOfRounds = numberOfRounds;
     }
 
     public LocalDateTime getCreateAt() {
@@ -66,11 +62,7 @@ public class Game {
         this.status = status;
     }
 
-    public User getCreatedBy() {
+    public Admin getCreatedBy() {
         return createdBy;
-    }
-
-    public void setCreatedBy(Admin createdBy) {
-        this.createdBy = createdBy;
     }
 }

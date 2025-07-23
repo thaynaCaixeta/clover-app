@@ -10,7 +10,7 @@ up:
 migrate:
 	docker compose run --rm flyway
 
-build:
+build: up
 	./gradlew clean build -x test
 
 run:
